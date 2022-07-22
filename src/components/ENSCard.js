@@ -1,6 +1,9 @@
 import React from 'react'
 
 const ENSCard = ({ ens }) => {
+    if (!ens.meta) return;
+    let pattern = /.eth/g;
+    if (!(pattern.test(ens.meta.name))) return;
     return (
         <div className='card ens-card'>
             {/* <img src={ens.meta.content[1].url} alt='nft' className='ens-image' /> */}
