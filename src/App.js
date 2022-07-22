@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import ENSContainer from './components/ENSContainer';
 import './App.css';
 
 function App() {
+
+  const [wallletAdddress, setWallletAddress] = useState(null);
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      console.log('MetaMask is installed!');
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      setWallletAddress(accounts[0]);
+
+      debugger;
+    }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='text'>
+        Account: {wallletAdddress}
+      </div>
+      <button className='connect-button' onClick={connectWallet}>
+        Connect Wallet
+      </button>
+      <ENSContainer />
     </div>
   );
 }
