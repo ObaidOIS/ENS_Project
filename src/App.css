@@ -37,6 +37,13 @@ body {
   font-weight: 600;
 }
 
+.d-text {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-top: 5%;
+}
+
 .head-text {
   margin-top: 5%;
   margin-bottom: 5%;

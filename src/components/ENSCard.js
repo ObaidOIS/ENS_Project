@@ -1,14 +1,48 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom';
 const ENSCard = ({ ens }) => {
+    const navigate = useNavigate();
+    const sellectToken = async () => {
+        console.log('selectToken');
+        console.log(ens.tokenId);
+        var resp;
+        // const check_user = await fetch(`http://localhost:8000/api/user/${ens.tokenId}/`);
+        const check_user = await fetch('http://127.0.0.1:8000/api/user/register/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ens_name: `${ens.meta.name}`,
+                token_id: `${ens.tokenId}`,
+            })
+        }).then(response => {
+            resp = response;
+            return response.json();
+        }).then(json => {
+            return {
+                response: resp,
+                json: json,
+                error: !resp.ok
+            };
+        });
+        console.log(check_user.response.status);
+        if (check_user.response.status === 200) {
+            console.log('success');
+            console.log(check_user.json);
+            navigate('./dashboard/');
+        }
+
+    }
+
+
     if (!ens.meta) return;
     let pattern = /.eth/g;
     if (!(pattern.test(ens.meta.name))) return;
     return (
-        <div className='card ens-card'>
+        <div className='card ens-card' onClick={sellectToken}>
             {/* <img src={ens.meta.content[1].url} alt='nft' className='ens-image' /> */}
-            {/* <img src={"https://lh3.googleusercontent.com/R6M9t48ljRRTGRJ7usawHgQYx-FBKZq_pRetnpbenHMwKKfxlSHi2h2XLTudw-QDpneGIv9-bQY_QfzoZ0dUlbPXMCQ2dO-7VhB8"} alt='nft' className='ens-image' />
-            {ens.meta.content[0].url} */}
             <div className='card content'>
                 <div className='card content-item'>
                     Contract Address
@@ -17,10 +51,10 @@ const ENSCard = ({ ens }) => {
                     {ens.contract}
                 </div>
                 <div className='card content-item'>
-                    Collection Address
+                    Token id
                 </div>
                 <div className='card address'>
-                    {ens.collection}
+                    {ens.tokenId}
                 </div>
                 <div className='card content-item'>
                     ENS Name
