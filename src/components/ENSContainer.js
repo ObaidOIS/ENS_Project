@@ -1,6 +1,6 @@
 import React from 'react'
 import ENSCard from './ENSCard'
-import demoENS from '../ens.json'
+import demoENS from '../Test_ens.json'
 
 const ENSContainer = ({ ensName }) => {
     return (
@@ -9,7 +9,6 @@ const ENSContainer = ({ ensName }) => {
                 Choose Your ENS Token
             </div>
             <div className='ens-container'>
-                {/* <ENSCard ens={ensName} /> */}
                 {ensName.map((ens, index) => {
                     return <ENSCard ens={ens} key={index} />
                 })}
