@@ -8,6 +8,7 @@ const ENSContainer = () => {
     const ensName = location.state;
     return (
         <>
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
             <div className='head-text'>
                 Choose Your ENS Token
             </div>
