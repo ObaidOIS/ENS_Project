@@ -4,7 +4,7 @@ function dashboard() {
     return (
         <div>
             <div className='d-text'>
-                Wellcome
+                Welcome
             </div>
         </div>
     )

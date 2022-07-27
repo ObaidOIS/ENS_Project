@@ -2,12 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 const ENSCard = ({ ens }) => {
     const navigate = useNavigate();
-    const sellectToken = async () => {
+    const selectToken = async () => {
         console.log('selectToken');
         console.log(ens.tokenId);
         var resp;
         // const check_user = await fetch(`http://localhost:8000/api/user/${ens.tokenId}/`);
-        const check_user = await fetch('http://127.0.0.1:8000/api/user/register/', {
+        const check_user = await fetch('http://django-env.eba-cbmnfm96.us-west-2.elasticbeanstalk.com/api/user/register/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -31,7 +31,7 @@ const ENSCard = ({ ens }) => {
         if (check_user.response.status === 200) {
             console.log('success');
             console.log(check_user.json);
-            navigate('./dashboard/');
+            navigate('/dashboard/');
         }
 
     }
@@ -41,7 +41,7 @@ const ENSCard = ({ ens }) => {
     let pattern = /.eth/g;
     if (!(pattern.test(ens.meta.name))) return;
     return (
-        <div className='card ens-card' onClick={sellectToken}>
+        <div className='card ens-card' onClick={selectToken}>
             {/* <img src={ens.meta.content[1].url} alt='nft' className='ens-image' /> */}
             <div className='card content'>
                 <div className='card content-item'>
