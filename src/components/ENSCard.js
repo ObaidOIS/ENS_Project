@@ -7,7 +7,7 @@ const ENSCard = ({ ens }) => {
         console.log(ens.tokenId);
         var resp;
         // const check_user = await fetch(`http://localhost:8000/api/user/${ens.tokenId}/`);
-        const check_user = await fetch('http://django-env.eba-cbmnfm96.us-west-2.elasticbeanstalk.com/api/user/register/', {
+        const check_user = await fetch('http://django-env.eba-cbmnfm96.us-west-2.elasticbeanstalk.com:80/api/user/register/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
