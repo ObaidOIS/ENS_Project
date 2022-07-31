@@ -20,7 +20,7 @@ axiosInstance.interceptors.response.use(
     },
     async function (error) {
         const originalRequest = error.config;
-
+        console.log(error.response);
         if (typeof error.response === 'undefined') {
             alert(
                 'A server/network error occurred. ' +
