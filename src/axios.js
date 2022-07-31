@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
             : null,
         'Content-Type': 'application/json',
         accept: 'application/json',
+        'Content-Security-Policy': 'upgrade-insecure-requests',
     },
 });
 
