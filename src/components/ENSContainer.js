@@ -8,13 +8,13 @@ const ENSContainer = () => {
     const ensName = location.state;
     return (
         <>
-            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+            {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> */}
             <div className='head-text'>
                 Choose Your ENS Token
             </div>
             <div className='ens-container'>
-                {/* {ensName.map((ens, index) => { */}
-                {demoENS.map((ens, index) => {
+                {ensName.map((ens, index) => {
+                    // {demoENS.map((ens, index) => {
                     return <ENSCard ens={ens} key={index} />
                 })}
 

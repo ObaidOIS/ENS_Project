@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 
 const Main = () => {
     const navigate = useNavigate();
@@ -15,12 +15,11 @@ const Main = () => {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             setWalletAddress(accounts[0]);
         }
-
+        else {
+            console.log('MetaMask is not installed!');
+            alert('Please install MetaMask extension! or any other wallet');
+        }
     }
-    // const funcRedirect = () => {
-    //     console.log(ensName.items);
-    //     navigate('/ens', { state: { ensName } });
-    // }
 
     const getENSData = async () => {
 
@@ -30,7 +29,7 @@ const Main = () => {
         const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:0x3c389a52ce6f9e570b3a93de37a160d5d90319a8`)
         const data = await response.json();
         console.log(data.items);
-        setEnsName(data);
+        setEnsName([data]);
         console.log(ensName);
         navigate('/ens', { state: data.items });
     }
