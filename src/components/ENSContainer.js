@@ -5,12 +5,15 @@ import { useLocation } from 'react-router-dom';
 
 const ENSContainer = () => {
     const location = useLocation();
-    const ensName = location.state;
+    const ensName = location.state.asset;
+    const walletAddress = location.state.walletAddress;
     return (
         <>
-            {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> */}
+            <div className='text'>
+                Account: {walletAddress}
+            </div>
             <div className='head-text'>
-                Choose Your ENS Token
+                Select ENS Token For Authentication
             </div>
             <div className='ens-container'>
                 {ensName.map((ens, index) => {

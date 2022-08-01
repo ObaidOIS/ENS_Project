@@ -25,13 +25,13 @@ const Main = () => {
 
         if (!walletAdddress) return;
 
-        // const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:${wallletAdddress}`)
-        const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:0x3c389a52ce6f9e570b3a93de37a160d5d90319a8`)
+        const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:${walletAdddress}`)
+        // const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:0x3c389a52ce6f9e570b3a93de37a160d5d90319a8`)
         const data = await response.json();
         console.log(data.items);
         setEnsName([data]);
         console.log(ensName);
-        navigate('/ens', { state: data.items });
+        navigate('/ens', { state: { asset: data.items, walletAddress: walletAdddress } });
     }
 
     useEffect(() => {
@@ -42,9 +42,9 @@ const Main = () => {
     }, [walletAdddress]);
     return (
         <div className="App">
-            <div className='text'>
+            {/* <div className='text'>
                 Account: {walletAdddress}
-            </div>
+            </div> */}
             <button className='connect-button' onClick={connectWallet}>
                 Connect Wallet
             </button>
