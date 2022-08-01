@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://django-env.eba-cbmnfm96.us-west-2.elasticbeanstalk.com/api/';
+const baseURL = 'https://www.bestnfttrade.com/api/';
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
@@ -11,7 +11,6 @@ const axiosInstance = axios.create({
             : null,
         'Content-Type': 'application/json',
         accept: 'application/json',
-        'Content-Security-Policy': 'upgrade-insecure-requests',
     },
 });
 
