@@ -19,22 +19,29 @@ const Main = () => {
         }
     }
 
+    const filterENS = (ens_data) => {
+        const ens_list = ens_data.filter((ens) => {
+            if (!ens.meta) return;
+            return ens.meta.name.includes('eth')
+        }
+        )
+        return ens_list;
+    }
+
     const getENSData = async () => {
 
         if (!walletAdddress) return;
         console.log('walletAdddress', walletAdddress);
         const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:${walletAdddress}`)
         // const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:0x3c389a52ce6f9e570b3a93de37a160d5d90319a8`)
-        // const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:0x57dF94268b69FE62Bc5925C79D2e1b799ACc4e23`)
         // const response = await fetch(`https://api.etherscan.io/api?module=account&action=tokennfttx&address=0x57df94268b69fe62bc5925c79d2e1b799acc4e23&page=1&offset=100&startblock=0&endblock=27025780&sort=asc&apikey=5E9BW8EV7ZCR6551VRTMXEZJW2IMD63B69`)
         // const response = await fetch(`https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:0x57df94268b69fe62bc5925c79d2e1b799acc4e23`)
         const data = await response.json();
         // console.log(data);
         console.log("Owned Assets: ", data.items);
-        const filteredData = data.items.filter(item => item.meta.description.includes('ENS'));
+        const filteredData = filterENS(data.items);
         console.log("ENS Tokens: ", filteredData);
         setEnsName([data]);
-        // console.log(ensName);
         navigate('/ens', { state: { asset: filteredData, walletAddress: walletAdddress } });
     }
 
