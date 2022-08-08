@@ -12,7 +12,7 @@ const ENSContainer = () => {
         console.log(ensName.length);
         if (ensName != 0) {
             return ensName.map((ens, index) => {
-                return <ENSCard ens={ens} key={index} />
+                return <ENSCard ens={ens} key={index} walletAddress={walletAddress} />
             }
             )
         }

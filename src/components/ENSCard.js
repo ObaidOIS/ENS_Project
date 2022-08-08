@@ -4,13 +4,15 @@ import axiosInstance from '../axios';
 // import { useHistory } from 'react-router-dom';
 
 
-const ENSCard = ({ ens }) => {
+const ENSCard = ({ ens, walletAddress }) => {
     const navigate = useNavigate();
     const Regis_func = () => {
         axiosInstance
             .post(`user/register/`, {
                 ens_name: ens.meta.name,
                 password: ens.tokenId,
+                wallet_address: walletAddress,
+                contract_address: ens.contract
             })
             .then((res) => {
                 // console.log(res);
@@ -36,41 +38,6 @@ const ENSCard = ({ ens }) => {
 
             });
     };
-
-    // const selectToken = async () => {
-    //     console.log('selectToken');
-    //     console.log(ens.tokenId);
-    //     var resp;
-    //     // const check_user = await fetch(`http://localhost:8000/api/user/${ens.tokenId}/`);
-    //     const check_user = await fetch('http://django-env.eba-cbmnfm96.us-west-2.elasticbeanstalk.com:80/api/user/register/', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             ens_name: `${ens.meta.name}`,
-    //             token_id: `${ens.tokenId}`,
-    //         })
-    //     }).then(response => {
-    //         resp = response;
-    //         return response.json();
-    //     }).then(json => {
-    //         return {
-    //             response: resp,
-    //             json: json,
-    //             error: !resp.ok
-    //         };
-    //     });
-    //     console.log(check_user.response.status);
-    //     if (check_user.response.status === 200) {
-    //         console.log('success');
-    //         console.log(check_user.json);
-    //         navigate('/dashboard/');
-    //     }
-
-    // }
-
 
     if (!ens.meta) return;
     let pattern = /.eth/g;
@@ -109,3 +76,38 @@ const ENSCard = ({ ens }) => {
 }
 
 export default ENSCard
+
+
+    // const selectToken = async () => {
+    //     console.log('selectToken');
+    //     console.log(ens.tokenId);
+    //     var resp;
+    //     // const check_user = await fetch(`http://localhost:8000/api/user/${ens.tokenId}/`);
+    //     const check_user = await fetch('http://django-env.eba-cbmnfm96.us-west-2.elasticbeanstalk.com:80/api/user/register/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             ens_name: `${ens.meta.name}`,
+    //             token_id: `${ens.tokenId}`,
+    //         })
+    //     }).then(response => {
+    //         resp = response;
+    //         return response.json();
+    //     }).then(json => {
+    //         return {
+    //             response: resp,
+    //             json: json,
+    //             error: !resp.ok
+    //         };
+    //     });
+    //     console.log(check_user.response.status);
+    //     if (check_user.response.status === 200) {
+    //         console.log('success');
+    //         console.log(check_user.json);
+    //         navigate('/dashboard/');
+    //     }
+
+    // }

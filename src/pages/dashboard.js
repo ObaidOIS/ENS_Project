@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Home from '../components/home';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -16,33 +17,21 @@ const Dashboard = () => {
 
     }, [localStorage.getItem('access_token')]);
 
-    const logout = () => {
-        console.log('logout');
-        navigate('/logout');
-    }
+
     const login = () => {
-        console.log('login');
+        console.log('Please login');
         navigate('/');
     }
     return (
         <div>
-            {(token) ?
-                <div>
-                    <div className='text' >
-                        <h1 >Dashboard</h1>
-                        Welcome
-                    </div>
-                    <button className='connect-button' onClick={logout}>
-                        Logout
-                    </button>
-                </div> : <div>
-                    <div className='text' >
-                        Please Login
-                    </div>
-                    <button className='connect-button' onClick={login}>
-                        Login
-                    </button>
+            {(token) ? <Home /> : <div>
+                <div className='text' >
+                    Please Login
                 </div>
+                <button className='connect-button' onClick={login}>
+                    Login
+                </button>
+            </div>
             }
         </div>
     );
